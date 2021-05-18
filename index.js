@@ -389,6 +389,5 @@ app.post('/api',async (req, res) => {
 })
 
 
-app.listen(9999,()=>{
-    console.log('Server up at 9999')
-})
+var port_number = server.listen(process.env.PORT || 3000);
+app.listen(port_number);
