@@ -389,5 +389,8 @@ app.post('/api',async (req, res) => {
 })
 
 
-var port_number = server.listen(process.env.PORT || 3000);
-app.listen(port_number);
+const { PORT=3000, LOCAL_ADDRESS='0.0.0.0' } = process.env
+app.listen(PORT, LOCAL_ADDRESS, () => {
+  const address = app.address();
+  console.log('server listening at', address);
+});
