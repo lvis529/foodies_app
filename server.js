@@ -10,7 +10,7 @@ const Post=require('./model/post')
 const jwt=require('jsonwebtoken')
 const JWT_SECRET='SBCKQWHVUAOIGVIRQUGFWIU&*^%&$&**&*&&%NVKNBEKRYAUEWEYIUWOISDCVDHCB'
 
-mongoose.connect(' mongodb://127.0.0.1:27017/mylib',{
+mongoose.connect(' mongodb+srv://vishal:yash@cluster0.nv3u9.mongodb.net/foodies?retryWrites=true&w=majority',{
     useNewUrlParser:true,
     useUnifiedTopology:true
 })
@@ -84,14 +84,14 @@ app.post('/api/change-password',async (req,res)=>{
 })
 app.post('/api/login',async(req,res)=>{
     var {username,password}=req.body
-    // console.log(req.body.username)
+    console.log(req.body.username)
     var user;
-   await User.findOne({username:req.body.username},(error,data)=>{
+   await User.findOne({username:username},(error,data)=>{
         if(error){
             console.log(error)
         }else{
             user=data
-            // console.log("checj out nhdskhbvkhbsh",user)
+            console.log("checj out nhdskhbvkhbsh",user)
 
 
         }
@@ -351,6 +351,7 @@ var public_name;
                     console.log(error)
                 }else{
                     public_name = data.public_name
+                    console.log(public_name)
                 }
             })
             await Post.find({public_name:public_name} , async(error , data) =>{      
@@ -359,6 +360,7 @@ var public_name;
 
                 }
                 else{
+                    console.log("bjhvhb",data)
                     search=[...data];
                     console.log("this i search data : ",search)
                     res.json({status:'ok',data:search})
