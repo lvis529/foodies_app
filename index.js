@@ -6,6 +6,8 @@ const mongoose=require('mongoose')
 const User=require('./model/user')
 const Prof=require('./model/profile')
 const Post=require('./model/post')
+const port = process.env.PORT;
+console.log(`Your port is ${port}`)
 
 const jwt=require('jsonwebtoken')
 const JWT_SECRET='SBCKQWHVUAOIGVIRQUGFWIU&*^%&$&**&*&&%NVKNBEKRYAUEWEYIUWOISDCVDHCB'
@@ -389,4 +391,6 @@ app.post('/api',async (req, res) => {
 })
 
 
-app.listen(3000);
+app.listen(port,()=>{
+    console.log(port,"  running")
+});
