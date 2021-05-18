@@ -1,0 +1,51 @@
+<html>
+
+<head>
+
+    <head>
+        <title>Convert Image into Base64 String using js</title>
+        <input type="file" id="abc">
+        <button  type="submit">submit</button>
+        <img id="img">
+    </head>
+
+</head>
+
+<body>
+    <script type="text/javascript">
+
+        function toDataURL(src, callback) {
+            var image = new Image();
+            image.crossOrigin = 'Anonymous';
+            image.onload = function () {
+                var canvas = document.createElement('canvas');
+                var context = canvas.getContext('2d');
+                canvas.height = this.naturalHeight;
+                canvas.width = this.naturalWidth;
+                context.drawImage(this, 0, 0)
+                var dataURL = canvas.toDataURL('image/jpeg');
+                callback(dataURL)
+            }
+            image.src = src
+        }
+        var input = document.querySelector('input[type=file]')
+        input.addEventListener('change', onFileChange)
+        // URL.createObjectURL(file)
+        function onFileChange() {
+            var file = input.files[0]
+            console.log(file);
+            //   document.querySelector('img').src = URL.createObjectURL(file)
+            console.log(URL.createObjectURL(file));
+            
+            toDataURL( URL.createObjectURL(file), function (dataURL) {
+            console.log(dataURL)
+            
+        })
+        }
+
+    </script>
+
+
+</body>
+
+</html>
