@@ -124,6 +124,7 @@ app.post('/api/login',async(req,res)=>{
 
     
 })
+
 app.post('/api/register',async(req,res)=>{
     // hashing the passwords
     // bcrypt,md5,sha1,sha256,sha512.. password hashes
@@ -380,15 +381,29 @@ var public_name;
     }   
    )
 
-app.post('/api',async (req, res) => {
-    console.log(req.body);
-    // var resulthtml ='';
-    // // return response.blob();
-    // resulthtml= "<br> blob.size = " + blob.size + "</br>";
-    // resulthtml += "<br>blob.type = " + blob.type + "</br>";
-    // console.log(blob);
-    res.send({" Status":"ok"});
-})
+
+   app.get("/api/show",  async(req,res)=>{
+    console.log(req);
+    const {token} = req.body;
+    try{
+                const userd=jwt.verify(token,JWT_SECRET)
+                const username=userd.username
+                var profile1;
+                await Prof.findOne({username:username},(error,data)=>{
+                    if(error){
+                        console.log(error)
+                    }else{
+                        profile1 = data
+                        console.log(profile1)
+                    }
+                })
+    return res.json({status:"ok", data:profile1})       
+    }
+    catch(error){
+        console.log(e);
+    return res.json({status:'error in post',error:'please provide a valid web token'})
+    }
+    } )
 
 
 app.listen(port,()=>{
