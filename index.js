@@ -401,9 +401,9 @@ var public_name;
     }
     catch(error){
         console.log(e);
-    return res.json({status:'error in post',error:'please provide a valid web token'})
+    return res.json({status:'error',error:'please provide a valid web token'})
     }
-    } )
+    })
 
 
 app.listen(port,()=>{
